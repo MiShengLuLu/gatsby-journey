@@ -1,3 +1,5 @@
+const path = require('path')
+
 // 以编程的方式创建页面
 function createPages ({ actions }) {
   const { createPage } = actions
@@ -18,6 +20,19 @@ function createPages ({ actions }) {
   })
 }
 
+function onCreateNode ({ node, actions }) {
+  const { createNodeField } = actions
+  if (node.internal.type === 'MarkdownRemark') {
+    const slug = path.basename(node.fileAbsolutePath, '.md')
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slug
+    })
+  }
+}
+
 module.exports = {
-  createPages
+  createPages,
+  onCreateNode
 }
