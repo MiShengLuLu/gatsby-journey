@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.23.0",
+    "gatsby-node-helpers": "^1.2.1",
     "pluralize": "^8.0.0"
   }
 }
