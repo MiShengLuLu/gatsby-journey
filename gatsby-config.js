@@ -44,13 +44,20 @@ module.exports = {
         ],
       },
     },
+    // {
+    //   resolve: `gatsby-source-strapi`,
+    //   options: {
+    //     apiURL: `http://localhost:1337`,
+    //     queryLimit: 1000, // Defaults to 100
+    //     collectionTypes: ['Post']
+    //   },
+    // }
     {
-      resolve: `gatsby-source-strapi`,
+      resolve: 'gatsby-source-mystrapi',
       options: {
-        apiURL: `http://localhost:1337`,
-        queryLimit: 1000, // Defaults to 100
-        collectionTypes: ['Post']
-      },
+        apiURL: 'http://localhost:1337',
+        collectionTypes: ['Post', 'Product']
+      }
     }
   ],
 }
