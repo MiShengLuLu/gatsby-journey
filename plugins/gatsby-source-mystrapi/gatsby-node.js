@@ -13,12 +13,12 @@ async function sourceNodes ({ actions, createNodeId, createContentDigest }, conf
   // 将数据添加至 graphql 数据层中
   for(let [key, value] of Object.entries(final)) {
     // 1. 构建数据节点对象 allPostContent allProductContent
-    const nodeHelpers = createNodeHelpers({
+    const { createNodeFactory } = createNodeHelpers({
       typePrefix: key,
       createNodeId,
       createContentDigest
     })
-    const createNodeObject = nodeHelpers.createNodeFactory('content')
+    const createNodeObject = createNodeFactory('content')
     // 2. 根据数据节点对象创建 graphql 数据层的数据节点
     value.forEach(item => createNode(createNodeObject(item)))
   }

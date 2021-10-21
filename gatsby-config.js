@@ -25,6 +25,13 @@ module.exports = {
         path: `${__dirname}/src/posts/`,
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'xml',
+        path: `${__dirname}/xml/`,
+      },
+    },
     'gatsby-transformer-json',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
@@ -58,6 +65,7 @@ module.exports = {
         apiURL: 'http://localhost:1337',
         collectionTypes: ['Post', 'Product']
       }
-    }
+    },
+    'gatsby-transformer-xml'
   ],
 }
