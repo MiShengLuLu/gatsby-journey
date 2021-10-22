@@ -7,6 +7,7 @@
 module.exports = {
   siteMetadata: {
     title: 'hello Gatsby',
+    description: 'description in gatsby-node.js',
     author: 'LuLu'
   },
   /* Your site config here */
@@ -66,6 +67,8 @@ module.exports = {
         collectionTypes: ['Post', 'Product']
       }
     },
-    'gatsby-transformer-xml'
+    'gatsby-transformer-xml',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-less'
   ],
 }

@@ -1,34 +1,45 @@
 const xml2js = require('xml2js')
-// const { promisify } = require('util')
-// const parse = promisify(parseString)
+const { promisify } = require('util')
+const parse = promisify(xml2js.parseString)
+// const { parseStringPromise } = new xml2js.Parser()
 const { createNodeHelpers } = require('gatsby-node-helpers')
 
-async function onCreateNode (data) {
-  console.log(data)
-  // const { createNode } = actions
-  // if (node.internal.mediaType === 'application/xml') {
-  //   let content = await loadNodeContent(node)
-  //   // let data = await parse(content, { explicitArray: false, explicitRoot: false })
+async function onCreateNode ({ node, actions, loadNodeContent, createNodeId, createContentDigest }) {
+  const { createNode } = actions
+  if (node.internal.mediaType === 'application/xml') {
+    let content = await loadNodeContent(node)
 
-  //   const data = await xml2js.parseStringPromise(content, { explicitArray: false, explicitRoot: false })
+    const data = await parse(content, {
+      explicitArray: false,
+      explicitRoot: false,
+    })
 
-  //   // xml2js.parseString(
-  //   //   content,
-  //   //   {
-  //   //     explicitArray: false,
-  //   //     explicitRoot: false
-  //   //   },
-  //   //   (err, result) => {
-        
-  //   //   }
-  //   // )
+    // const data = await parseStringPromise(content, {
+    //   explicitArray: false,
+    //   explicitRoot: false,
+    // })
+    // { person: { name: [ '张三' ], age: [ '20' ] } }
+    console.log(data)
 
-  //   const { createNodeFactory } = createNodeHelpers({
-  //     typePrefix: 'XML',
-  //   })
-  //   const createNodeObject = createNodeFactory('parsedContent')
-  //   createNode(createNodeObject(data))
-  // }
+    // xml2js.parseString(
+    //   content,
+    //   {
+    //     explicitArray: false,
+    //     explicitRoot: false
+    //   },
+    //   (err, result) => {
+    //     console.log(result)
+    //   }
+    // )
+
+    const { createNodeFactory } = createNodeHelpers({
+      typePrefix: 'XML',
+      createNodeId,
+      createContentDigest,
+    })
+    const createNodeObject = createNodeFactory('parsedContent')
+    createNode(createNodeObject(data))
+  }
 }
 
 module.exports = {
